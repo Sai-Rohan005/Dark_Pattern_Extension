@@ -111,6 +111,7 @@ async def analyze(
 
             try:
                 os.remove(temp_path)
+                print(f"[API] Temporary file removed: {temp_path}")
 
             except Exception as e:
 

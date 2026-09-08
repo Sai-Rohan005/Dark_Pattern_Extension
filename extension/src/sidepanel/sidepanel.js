@@ -1942,9 +1942,9 @@ async function analyzeSelectedArea() {
         // Display annotated localization image
         // --------------------------------------------------------
 
-        displayAnnotatedImage(
-            currentAnalysis
-        );
+        // displayAnnotatedImage(
+        //     currentAnalysis
+        // );
 
         console.log(
             "[Dark Pattern Detector] Final selected-area analysis:",

@@ -919,6 +919,239 @@ button:disabled {
 
 
 /* ============================================================
+   ANALYSIS MODAL
+   ============================================================ */
+
+.analysis-modal {
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    z-index: 2147483647 !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    pointer-events: auto !important;
+}
+
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+
+.analysis-modal-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    background: rgba(0, 0, 0, 0.65) !important;
+
+    z-index: 0 !important;
+}
+
+
+/* ============================================================
+   MODAL CONTENT
+   ============================================================ */
+
+.analysis-modal-content {
+    position: relative !important;
+
+    z-index: 1 !important;
+
+    width: min(700px, 90vw) !important;
+    max-height: 85vh !important;
+
+    overflow-y: auto !important;
+
+    background: #ffffff !important;
+
+    border-radius: 12px !important;
+
+    padding: 24px !important;
+
+    box-sizing: border-box !important;
+
+    color: #111111 !important;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35) !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    display: block !important;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.analysis-modal-header {
+    display: flex !important;
+    align-items: center !important;
+
+    margin-bottom: 20px !important;
+}
+
+
+.analysis-modal-header h2 {
+    margin: 0 !important;
+
+    font-size: 22px !important;
+    font-weight: 700 !important;
+
+    color: #111111 !important;
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+   ============================================================ */
+
+.analysis-modal-close {
+    position: absolute !important;
+
+    top: 12px !important;
+    right: 12px !important;
+
+    width: 36px !important;
+    height: 36px !important;
+
+    border: none !important;
+    border-radius: 50% !important;
+
+    background: #eeeeee !important;
+
+    color: #111111 !important;
+
+    font-size: 26px !important;
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+
+    z-index: 10 !important;
+}
+
+
+.analysis-modal-close:hover {
+    background: #dddddd !important;
+}
+
+
+/* ============================================================
+   BODY
+   ============================================================ */
+
+.analysis-modal-body {
+    display: block !important;
+
+    color: #111111 !important;
+}
+
+
+/* ============================================================
+   INFO SECTIONS
+   ============================================================ */
+
+.analysis-info-section {
+    margin-bottom: 20px !important;
+
+    padding: 16px !important;
+
+    background: #f7f7f7 !important;
+
+    border-radius: 8px !important;
+}
+
+
+.analysis-info-section h3 {
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+
+    font-size: 16px !important;
+
+    color: #111111 !important;
+}
+
+
+/* ============================================================
+   INFO ROW
+   ============================================================ */
+
+.analysis-info-row {
+    display: flex !important;
+
+    justify-content: space-between !important;
+
+    gap: 20px !important;
+
+    padding: 8px 0 !important;
+
+    border-bottom: 1px solid #dddddd !important;
+}
+
+
+.analysis-info-row:last-child {
+    border-bottom: none !important;
+}
+
+
+.analysis-label {
+    font-weight: 600 !important;
+
+    color: #555555 !important;
+}
+
+
+.analysis-value {
+    text-align: right !important;
+
+    color: #111111 !important;
+
+    word-break: break-word !important;
+}
+
+
+.analysis-confidence {
+    font-weight: 700 !important;
+}
+
+
+/* ============================================================
+   VISUALIZATION
+   ============================================================ */
+
+.analysis-visualization {
+    display: block !important;
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    height: auto !important;
+
+    margin-top: 12px !important;
+
+    border-radius: 8px !important;
+
+    object-fit: contain !important;
+}
+
+
+
+
+/* ============================================================
    RESPONSIVE
 ============================================================ */
 
