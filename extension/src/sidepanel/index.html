@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Responsive side panel -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dark Pattern Detector</title>
+
+    <!-- Side panel stylesheet -->
+    <link rel="stylesheet" href="sidepanel.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         APP CONTAINER
+    ========================================================== -->
+    <div id="app">
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div class="brand-text">
+
+                    <h1>
+                        Dark Pattern Detector
+                    </h1>
+
+                    <p>
+                        AI-powered website analysis
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Activation status -->
+            <div class="status-container">
+
+                <span
+                    id="status-dot"
+                    class="status-dot inactive"
+                ></span>
+
+                <span id="status-text">
+                    Inactive
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             ACTIVATION SECTION
+        ====================================================== -->
+        <section
+            id="activation-section"
+            class="section"
+        >
+
+            <div class="activation-card">
+
+                <div class="activation-icon">
+                    🔍
+                </div>
+
+                <h2>
+                    Analyze websites for dark patterns
+                </h2>
+
+                <p>
+                    Activate the detector to analyze webpage UI
+                    and identify potentially manipulative design patterns.
+                </p>
+
+                <button
+                    id="activate-btn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    Activate Detector
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             MAIN ANALYSIS SECTION
+             Hidden until extension is activated
+        ====================================================== -->
+        <main
+            id="analysis-section"
+            class="section hidden"
+        >
+
+            <!-- =================================================
+                 ANALYSIS OPTIONS
+            ================================================== -->
+            <section class="analysis-options">
+
+                <div class="section-title">
+
+                    <h2>
+                        Analyze Page
+                    </h2>
+
+                    <p>
+                        Choose what part of the webpage you want
+                        to analyze.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     ENTIRE PAGE
+                ================================================== -->
+                <button
+                    id="analyze-page-btn"
+                    class="analysis-btn"
+                    type="button"
+                >
+
+                    <span class="analysis-btn-icon">
+                        📄
+                    </span>
+
+                    <span class="analysis-btn-content">
+
+                        <strong>
+                            Analyze Entire Page
+                        </strong>
+
+                        <small>
+                            Analyze the complete webpage
+                        </small>
+
+                    </span>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- =================================================
+                     VISIBLE AREA
+                ================================================== -->
+                <button
+                    id="analyze-visible-btn"
+                    class="analysis-btn"
+                    type="button"
+                >
+
+                    <span class="analysis-btn-icon">
+                        👁️
+                    </span>
+
+                    <span class="analysis-btn-content">
+
+                        <strong>
+                            Analyze Visible Area
+                        </strong>
+
+                        <small>
+                            Analyze what is currently visible
+                        </small>
+
+                    </span>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- =================================================
+                     SELECTED AREA
+                ================================================== -->
+                <button
+                    id="analyze-selected-btn"
+                    class="analysis-btn"
+                    type="button"
+                >
+
+                    <span class="analysis-btn-icon">
+                        ✂️
+                    </span>
+
+                    <span class="analysis-btn-content">
+
+                        <strong>
+                            Analyze Selected Area
+                        </strong>
+
+                        <small>
+                            Select a specific area of the webpage
+                        </small>
+
+                    </span>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </section>
+
+
+            <!-- =================================================
+                 ANALYSIS STATUS
+            ================================================== -->
+            <section
+                id="analysis-status"
+                class="analysis-status hidden"
+            >
+
+                <div class="loading-spinner"></div>
+
+                <div>
+
+                    <strong id="analysis-status-title">
+                        Analyzing webpage...
+                    </strong>
+
+                    <p id="analysis-status-message">
+                        Please wait while the AI analyzes the page.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 RESULTS
+            ================================================== -->
+            <section
+                id="results-section"
+                class="results-section"
+            >
+
+                <div class="section-title results-title">
+
+                    <div>
+
+                        <h2>
+                            Analysis Results
+                        </h2>
+
+                        <p>
+                            Detected dark patterns will appear here.
+                        </p>
+
+                    </div>
+
+                    <span
+                        id="result-count"
+                        class="result-count"
+                    >
+                        0
+                    </span>
+                </div>
+
+
+                <!-- =================================================
+                    ANNOTATED IMAGE
+                ================================================== -->
+                <div
+                    id="annotated-image-section"
+                    class="annotated-image-section hidden"
+                >
+
+                    <div class="annotated-image-header">
+
+                        <div>
+                            <h3>
+                                Dark Pattern Localization
+                            </h3>
+
+                            <p>
+                                Components that contributed to the prediction
+                                are highlighted below.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="annotated-image-container">
+
+                        <img
+                            id="annotated-image"
+                            class="annotated-image"
+                            alt="Annotated dark pattern detection result"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     NO RESULTS
+                ================================================== -->
+                <div
+                    id="no-results"
+                    class="empty-state"
+                >
+
+                    <div class="empty-icon">
+                        🛡️
+                    </div>
+
+                    <h3>
+                        No analysis yet
+                    </h3>
+
+                    <p>
+                        Analyze a webpage to see whether
+                        dark patterns are present.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     RESULTS CONTAINER
+                     Results are inserted by Result.js
+                ================================================== -->
+                <div
+                    id="results-container"
+                    class="results-container"
+                >
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DEACTIVATE
+            ================================================== -->
+            <section class="deactivate-section">
+
+                <button
+                    id="deactivate-btn"
+                    class="secondary-btn"
+                    type="button"
+                >
+                    Deactivate Detector
+                </button>
+
+            </section>
+
+        </main>
+
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+        <footer class="footer">
+
+            <span>
+                Dark Pattern Detector
+            </span>
+
+            <span>
+                v1.0.0
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         
+         IMPORTANT:
+         Scripts are loaded in dependency order.
+    ========================================================== -->
+
+
+    <!-- =========================================================
+         1. API CLIENT
+         
+         Provides:
+         window.DarkPatternAPI
+         window.darkPatternAPI
+    ========================================================== -->
+    <script src="../api/api.js"></script>
+
+
+    <!-- =========================================================
+         2. SCREENSHOT CAPTURE
+         
+         Provides:
+         window.ScreenshotCapture
+         captureVisibleScreenshot()
+         captureSelectedScreenshot()
+    ========================================================== -->
+    <script src="../screenshot/capture.js"></script>
+
+
+    <!-- =========================================================
+         3. SIDE PANEL COMPONENTS
+    ========================================================== -->
+
+    <script src="components/Header.js"></script>
+
+    <script src="components/AnalysisStatus.js"></script>
+
+    <script src="components/AnalyzeButtons.js"></script>
+
+    <script src="components/DetectionCard.js"></script>
+
+    <script src="components/Result.js"></script>
+
+
+    <!-- =========================================================
+         4. MAIN SIDE PANEL CONTROLLER
+         
+         Must be loaded LAST because it depends on:
+         
+         - api.js
+         - capture.js
+         - Header.js
+         - AnalysisStatus.js
+         - AnalyzeButton.js
+         - DetectionCard.js
+         - Result.js
+    ========================================================== -->
+
+    <script src="sidepanel.js"></script>
+
+</body>
+
+</html>

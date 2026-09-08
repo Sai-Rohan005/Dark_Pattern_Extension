@@ -1,0 +1,205 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dark Pattern Detector</title>
+
+    <link
+        rel="stylesheet"
+        href="popup.css"
+    >
+</head>
+
+<body>
+
+    <div id="popup">
+
+        <!-- ==================================================
+             HEADER
+        =================================================== -->
+
+        <header class="popup-header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div class="brand-text">
+
+                    <h1>
+                        Dark Pattern Detector
+                    </h1>
+
+                    <p>
+                        AI-powered website analysis
+                    </p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             STATUS
+        =================================================== -->
+
+        <section class="status-section">
+
+            <div class="status-indicator">
+
+                <span
+                    id="status-dot"
+                    class="status-dot inactive"
+                ></span>
+
+                <span id="status-text">
+                    Detector Inactive
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             MAIN CONTENT
+        =================================================== -->
+
+        <main class="popup-content">
+
+            <div
+                id="inactive-view"
+                class="view"
+            >
+
+                <div class="info-icon">
+                    🔍
+                </div>
+
+                <h2>
+                    Analyze websites for dark patterns
+                </h2>
+
+                <p>
+                    Open the Dark Pattern Detector
+                    side panel to analyze webpages
+                    for potentially manipulative
+                    design patterns.
+                </p>
+
+                <button
+                    id="open-sidepanel-btn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    Open Detector
+                </button>
+
+            </div>
+
+
+            <div
+                id="active-view"
+                class="view hidden"
+            >
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>
+                    Detector is Active
+                </h2>
+
+                <p>
+                    The detector is ready to analyze
+                    the current webpage.
+                </p>
+
+                <button
+                    id="open-analysis-btn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    Open Analysis Panel
+                </button>
+
+                <button
+                    id="deactivate-btn"
+                    class="secondary-btn"
+                    type="button"
+                >
+                    Deactivate Detector
+                </button>
+
+            </div>
+
+
+            <!-- ==================================================
+                 RESTRICTED PAGE MESSAGE
+            =================================================== -->
+
+            <div
+                id="restricted-view"
+                class="view hidden"
+            >
+
+                <div class="warning-icon">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Page Cannot Be Analyzed
+                </h2>
+
+                <p id="restricted-message">
+                    Chrome does not allow extensions
+                    to analyze this page.
+                </p>
+
+            </div>
+
+        </main>
+
+
+        <!-- ==================================================
+             FOOTER
+        =================================================== -->
+
+        <footer class="popup-footer">
+
+            <span>
+                Dark Pattern Detector
+            </span>
+
+            <span>
+                v1.0.0
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ======================================================
+         JAVASCRIPT
+    ======================================================= -->
+
+    <script src="popup.js"></script>
+
+</body>
+
+</html>
+```
