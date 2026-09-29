@@ -23,11 +23,11 @@
 
   "action": {
     "default_title": "Dark Pattern Detector",
-    "default_popup": "src/popup/popup.html"
+    "default_popup": "dist/src/popup/popup.html"
   },
 
   "side_panel": {
-    "default_path": "src/sidepanel/index.html"
+    "default_path": "dist/src/sidepanel/index.html"
   },
 
   "content_scripts": [

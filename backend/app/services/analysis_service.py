@@ -6,7 +6,24 @@ import time
 
 load_dotenv()
 
-HF_SPACE = os.getenv("HF_SPACE")
+
+def normalize_hf_space(value):
+    if not value:
+        return ""
+
+    value = value.strip()
+    while (
+        len(value) >= 2
+        and value[0] == value[-1]
+        and value[0] in {"'", '"'}
+    ):
+        value = value[1:-1].strip()
+
+    return value
+
+
+HF_SPACE = normalize_hf_space(os.getenv("HF_SPACE"))
+HF_TOKEN = os.getenv("HF_TOKEN")
 
 class AnalysisService:
 
@@ -38,8 +55,14 @@ class AnalysisService:
                 "Connecting to Hugging Face API..."
             )
 
+            if not HF_SPACE:
+                raise RuntimeError(
+                    "HF_SPACE is not configured. Set it to the Hugging Face Space URL or repository ID."
+                )
+
             self.client = Client(
-                HF_SPACE
+                HF_SPACE,
+                hf_token=HF_TOKEN
             )
 
             print(
@@ -787,4 +810,3 @@ class AnalysisService:
 # ================================================================
 # Singleton
 # ================================================================
-
