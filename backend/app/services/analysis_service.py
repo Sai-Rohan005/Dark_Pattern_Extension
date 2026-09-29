@@ -62,7 +62,7 @@ class AnalysisService:
 
             self.client = Client(
                 HF_SPACE,
-                hf_token=HF_TOKEN
+                token=HF_TOKEN
             )
 
             print(
