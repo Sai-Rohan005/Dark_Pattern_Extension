@@ -1,12 +1,12 @@
 
 from gradio_client import Client, handle_file
+from dotenv import load_dotenv
+import os
 import time
 
+load_dotenv()
 
-HF_SPACE = (
-    "https://sai-rohan-dark-pattern-detection-api.hf.space/"
-)
-
+HF_SPACE = os.getenv("HF_SPACE")
 
 class AnalysisService:
 
