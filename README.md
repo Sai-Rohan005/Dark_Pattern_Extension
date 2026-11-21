@@ -81,8 +81,10 @@ their source changes archived separately to be reconstructable.
 
 ## Data and limitations
 
-See [dataset documentation](docs/datasets.md). Dataset provenance, licenses,
-annotation policy, split composition and performance remain unverified.
+See the [dataset audit](docs/dataset.md) for local AIDUI counts, provenance,
+annotation and graph details, measured leakage, and corrected grouped web
+manifests. Full app-safe splitting remains pending source identity metadata.
+No model performance has been measured by this scaffold.
 
 ## Results
 
