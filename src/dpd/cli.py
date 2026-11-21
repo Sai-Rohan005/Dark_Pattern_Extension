@@ -31,7 +31,7 @@ def load_config(path):
 
 def main(mode):
     parser = argparse.ArgumentParser(description=f"{mode} research scaffold")
-    parser.add_argument("--config", default="configs/default.yaml")
+    parser.add_argument("--config", default="configs/ablation.yaml" if mode == "eval" else "configs/default.yaml")
     parser.add_argument("--dry-run", action="store_true", help="Validate setup and log provenance only")
     args = parser.parse_args()
     try:
@@ -54,6 +54,20 @@ def main(mode):
     }
     (run_dir / "environment.json").write_text(json.dumps(record, indent=2) + "\n")
     print(f"Saved configuration and environment to {run_dir}")
+    if mode == "eval" and config["evaluation"].get("protocol") == "ablation" and not args.dry_run:
+        from dpd.evaluation.ablation import run_ablation
+        try:
+            complete = run_ablation(config)
+            record["status"] = "complete" if complete else "incomplete"
+        except (OSError, ValueError, KeyError) as error:
+            record["status"] = "failed"
+            record["error"] = str(error)
+            (run_dir / "environment.json").write_text(json.dumps(record, indent=2) + "\n")
+            parser.exit(1, f"Evaluation failed: {error}\n")
+        (run_dir / "environment.json").write_text(json.dumps(record, indent=2) + "\n")
+        if not complete:
+            parser.exit(2, "Evaluation incomplete; see blocked rows and provenance.\n")
+        return
     if not args.dry_run:
         parser.exit(1, f"{mode} is not implemented: connect the dataset, model and loop. No metrics were computed.\n")
     print("Setup validated. No training or evaluation was performed.")

@@ -68,3 +68,6 @@ virtualenv/
 .conda/
 .tox/
 .nox/
+
+# Per-sample evaluation artifacts and runtime logs; aggregate reports are reviewable.
+/results/predictions/

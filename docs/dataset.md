@@ -111,7 +111,11 @@ confidence values, and eleven edge features including nearest-neighbor
 relations. It expects a different saved schema at runtime. The available schema
 must not be assumed to match that training notebook or a deployed checkpoint.
 No checkpoint/schema pairing, graph cache or dataset-wide graph generation was
-validated here. Freeze a matching implementation/schema/checkpoint before use.
+validated during the dataset audit. The subsequent ablation feature extractor
+uses the user-supplied deployed repository, checks the graph schema against
+the GAT checkpoint, and requires a strict state-dictionary match. See the
+[evaluation protocol](evaluation.md). This validates that selected pairing,
+not the incompatible historical training-notebook variant.
 
 ## Saved split manifest and leakage
 
@@ -224,7 +228,9 @@ stay ignored; the aggregate report supports review.
   inherited label, not proof that deceptive behavior is absent.
 - Screenshots omit interaction, timing and account state. Language and
   collection-date coverage were not measured; live sites may have changed.
-- OCR/widget errors and zero-feature fallbacks can distort modalities. Their
-  frequencies were not measured. Graph variants remain unreconciled.
+- OCR/widget errors can distort modalities. Historical code can silently use
+  zero features; the new evaluation extractor fails on extraction errors and
+  records empty graphs using the checkpoint's learned empty embedding.
+  Historical graph variants remain unreconciled.
 - Download provenance, screenshot licensing and local annotation adjudication
   remain incomplete. No performance metric is claimed.

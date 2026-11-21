@@ -1,1 +1,1 @@
-"""DINOv2, ModernBERT, GAT, projections and fusion (to be implemented)."""
+"""Frozen encoders, UI graphs, projection heads and multimodal fusion."""

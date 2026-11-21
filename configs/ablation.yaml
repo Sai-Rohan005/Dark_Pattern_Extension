@@ -1,0 +1,26 @@
+seed: 42
+deterministic: true
+output_dir: runs
+model:
+  projection_dim: 64
+  dropout: 0.1
+training:
+  epochs: 40
+  batch_size: 16
+  learning_rate: 0.001
+  weight_decay: 0.01
+data:
+  train_manifest: runs/dataset-audit-saved-manifest/train.csv
+  val_manifest: runs/dataset-audit-saved-manifest/val.csv
+  test_manifest: runs/dataset-audit-saved-manifest/test.csv
+evaluation:
+  protocol: ablation
+  dataset_scope: Audited identifiable web subset; app identities unresolved
+  num_threads: 4
+  seeds: [42, 43, 44]
+  threshold: 0.5
+  results_dir: results
+  feature_manifest: runs/features/manifest.csv
+  text_manifest: runs/ocr/text.json
+  tfidf_max_features: 10000
+  logistic_c: 1.0
