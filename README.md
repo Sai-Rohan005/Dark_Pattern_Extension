@@ -9,6 +9,9 @@ by projection layers and multimodal fusion.
 Frozen-encoder feature extraction, fusion-head ablations and a TF-IDF baseline
 are implemented; see [evaluation protocol](docs/evaluation.md). General encoder
 training and the default training entrypoint remain TODO.
+The [local inference CLI](docs/inference.md) accepts a screenshot plus supplied
+text or HTML, using a verified exported head. `make test` runs pytest, including
+offline encoder, loader, graph and fusion checks.
 The existing `backend/` serves an external Hugging Face model; browser clients
 live in `extension/`, `extension_react/`, and `extension_react_firefox/`.
 They remain separate from this research scaffold.

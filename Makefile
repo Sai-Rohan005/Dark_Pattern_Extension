@@ -15,4 +15,4 @@ eval:
 	$(PYTHON) scripts/evaluate.py --config $(CONFIG) $(ARGS)
 
 test:
-	$(PYTHON) -m unittest discover -s tests -v
+	$(PYTHON) -m pytest tests -q

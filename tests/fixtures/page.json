@@ -1,0 +1,13 @@
+{
+  "description": "Synthetic page fixture; boxes use screenshot pixel coordinates, not DP labels",
+  "width": 400,
+  "height": 300,
+  "class_names": ["Container", "Text", "Button"],
+  "detections": [
+    {"class_id": 0, "bbox": [10, 20, 390, 290], "confidence": 1.0},
+    {"class_id": 1, "bbox": [40, 40, 240, 70], "confidence": 0.9},
+    {"class_id": 2, "bbox": [40, 120, 140, 160], "confidence": 0.95},
+    {"class_id": 2, "bbox": [180, 120, 280, 160], "confidence": 0.85},
+    {"class_id": 1, "bbox": [40, 220, 240, 250], "confidence": 0.9}
+  ]
+}

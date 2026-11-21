@@ -1,1 +1,1 @@
-"""Dataset loading, preprocessing and split construction (to be implemented)."""
+"""Validated manifests, frozen-feature loading and dataset audits."""

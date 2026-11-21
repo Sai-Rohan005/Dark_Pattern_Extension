@@ -14,7 +14,8 @@ from sklearn.preprocessing import StandardScaler
 import torch
 from torch import nn
 
-from dpd.data.audit import overlap, sha256, write_csv
+from dpd.data.audit import sha256, write_csv
+from dpd.data.loaders import load_splits, load_features
 from dpd.evaluation.metrics import METRICS, binary_metrics
 from dpd.models.fusion import FeatureFusion
 from dpd.reproducibility import environment_versions, seed_everything
@@ -23,71 +24,18 @@ COMBINATIONS = (("visual",), ("text",), ("graph",), ("visual", "text"),
                 ("visual", "graph"), ("text", "graph"), ("visual", "text", "graph"))
 
 
-def load_splits(config):
-    rows, hashes = [], {}
-    for split in ("train", "val", "test"):
-        path = Path(config["data"][f"{split}_manifest"])
-        hashes[split] = sha256(path)
-        with path.open(newline="") as handle:
-            part = list(csv.DictReader(handle))
-        if not part:
-            raise ValueError(f"Empty {split} manifest")
-        for row in part:
-            if row.get("split") != split or not row.get("group_id"):
-                raise ValueError("Each sample needs its correct split and a reviewed site/app group")
-            row["label"] = int(row["label"])
-            if row["label"] not in (0, 1):
-                raise ValueError("Labels must be binary")
-            if sha256(row["image_path"]) != row["file_sha256"]:
-                raise ValueError(f"Image changed since audit: {row['file_name']}")
-        if {r["label"] for r in part} != {0, 1}:
-            raise ValueError(f"Both classes required in {split}")
-        rows.extend(sorted(part, key=lambda r: r["file_name"]))
-    for key in ("sample_id", "file_name"):
-        if len({r[key] for r in rows}) != len(rows):
-            raise ValueError(f"Duplicate {key}")
-    for key in ("group_id", "file_sha256", "pixel_sha256"):
-        if overlap(rows, key):
-            raise ValueError(f"Cross-split leakage in {key}")
-    return rows, hashes
 
 
-def load_features(path, rows):
-    if not path:
-        raise ValueError("feature_manifest is not configured")
-    path = Path(path)
-    metadata_path = path.with_name("provenance.json")
-    metadata = json.loads(metadata_path.read_text())
-    if not metadata.get("encoders"):
-        raise ValueError("Feature provenance must identify encoders")
-    with path.open(newline="") as handle:
-        index = list(csv.DictReader(handle))
-    by_name = {r["file_name"]: r for r in index}
-    if len(by_name) != len(index):
-        raise ValueError("Duplicate feature index filenames")
-    features = {name: [] for name in ("visual", "text", "graph")}
-    for row in rows:
-        entry = by_name[row["file_name"]]
-        if entry["image_sha256"] != row["file_sha256"] or sha256(entry["feature_path"]) != entry["feature_sha256"]:
-            raise ValueError("Feature cache identity/hash mismatch")
-        with np.load(entry["feature_path"], allow_pickle=False) as arrays:
-            for name in features:
-                value = np.asarray(arrays[f"{name}_feature"], dtype=np.float32)
-                if value.ndim != 1 or not value.size or not np.isfinite(value).all():
-                    raise ValueError(f"Invalid {name} feature for {row['file_name']}")
-                features[name].append(value)
-    return {name: np.stack(values) for name, values in features.items()}, {
-        "manifest_sha256": sha256(path), "provenance_sha256": sha256(metadata_path),
-        "provenance": metadata,
-    }
 
 
-def train_fusion(features, labels, masks, modalities, cfg, seed):
+def train_fusion(features, labels, masks, modalities, cfg, seed, artifact_path=None):
     generator = seed_everything(seed, cfg["deterministic"])
     # Every learned normalization is fitted on training data only.
     normalized = {}
+    normalization = {}
     for name in modalities:
         scaler = StandardScaler().fit(features[name][masks["train"]])
+        normalization[name] = {"mean": torch.tensor(scaler.mean_), "scale": torch.tensor(scaler.scale_)}
         normalized[name] = torch.tensor(scaler.transform(features[name]), dtype=torch.float32)
     model = FeatureFusion({name: features[name].shape[1] for name in modalities}, modalities,
                           cfg["model"]["projection_dim"], cfg["model"]["dropout"])
@@ -121,6 +69,15 @@ def train_fusion(features, labels, masks, modalities, cfg, seed):
     model.eval()
     with torch.no_grad():
         probability = torch.sigmoid(model({name: x[masks["test"]] for name, x in normalized.items()})).numpy()
+    if artifact_path is not None:
+        artifact_path = Path(artifact_path)
+        artifact_path.parent.mkdir(parents=True, exist_ok=True)
+        with artifact_path.open("xb") as handle:
+            torch.save({"format_version": 1, "state_dict": model.state_dict(),
+                        "dimensions": {name: features[name].shape[1] for name in modalities},
+                        "modalities": list(modalities), "normalization": normalization,
+                        "projection_dim": cfg["model"]["projection_dim"], "dropout": cfg["model"]["dropout"],
+                        "seed": seed, "best_epoch": best_epoch, "validation_loss": best_loss}, handle)
     return probability, {"best_epoch": best_epoch, "validation_loss": best_loss}
 
 
@@ -153,7 +110,7 @@ def run_ablation(config):
     package = Path(__file__).resolve().parents[1]
     provenance["source_sha256"] = {str(p.relative_to(package)): sha256(p) for p in (
         Path(__file__), package / "evaluation/metrics.py", package / "models/fusion.py",
-        package / "reproducibility.py")}
+        package / "data/loaders.py", package / "reproducibility.py")}
     feature_error, text_error, features, text = None, None, None, None
     try:
         features, provenance["features"] = load_features(settings.get("feature_manifest"), rows)
