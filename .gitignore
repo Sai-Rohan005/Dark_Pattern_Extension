@@ -37,3 +37,34 @@ Thumbs.db
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Research data and generated artifacts (source package src/dpd/data is retained)
+/data/
+/datasets/
+/checkpoints/
+/runs/
+/outputs/
+/artifacts/
+/cache/
+.cache/
+wandb/
+mlruns/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.parquet
+*.arrow
+*.pkl
+*.pickle
+
+# Additional local environments
+virtualenv/
+.conda/
+.tox/
+.nox/

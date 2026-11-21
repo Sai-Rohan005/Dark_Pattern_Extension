@@ -1,0 +1,30 @@
+# Initial choices, not tuned hyperparameters or measured results.
+seed: 42
+deterministic: true
+output_dir: runs
+model:
+  visual_encoder: facebook/dinov2-base
+  text_encoder: answerdotai/ModernBERT-base
+  # Set immutable model repository revisions before a real experiment.
+  visual_revision: null
+  text_revision: null
+  graph_encoder: gat
+  projection_dim: 256
+  gat_heads: 4
+  dropout: 0.1
+  fusion: concat
+  task: binary_classification
+training:
+  batch_size: 8
+  epochs: 10
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  num_workers: 0
+data:
+  # Supply independently grouped splits; no dataset is bundled.
+  train_manifest: null
+  val_manifest: null
+  test_manifest: null
+evaluation:
+  checkpoint: null
+  threshold: 0.5

@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+}
+
+.app-loading {
+  margin: 2rem auto;
+  color: #64748b;
+  font: 14px/1.5 system-ui, sans-serif;
+  text-align: center;
+}

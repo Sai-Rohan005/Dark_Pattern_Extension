@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+
+  "name": "Dark Pattern Detector",
+  "version": "1.0.0",
+  "description": "Detect dark patterns on websites using AI-powered visual and textual analysis.",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "dark-pattern-detector@rohan",
+      "data_collection_permissions": {
+        "required": [
+          "websiteContent"
+        ]
+      }
+    }
+  },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting",
+    "storage"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "background": {
+    "scripts": [
+      "src/background/service-worker.js"
+    ]
+  },
+
+  "action": {
+    "default_title": "Dark Pattern Detector",
+    "default_popup": "dist/src/popup/popup.html"
+  },
+
+  "sidebar_action": {
+    "default_title": "Dark Pattern Detector",
+    "default_panel": "dist/src/sidepanel/index.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/content.js",
+        "src/content/selection.js",
+        "src/content/overlay.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+
+  "icons": {
+    "16": "assets/icons/icon16.jpeg",
+    "48": "assets/icons/icon48.jpeg",
+    "128": "assets/icons/icon128.jpeg"
+  }
+}
