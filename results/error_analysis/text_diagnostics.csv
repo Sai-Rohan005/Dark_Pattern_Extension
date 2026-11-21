@@ -1,0 +1,11 @@
+file_name,error_type,token_count,token_limit,truncated,present_cues,retained_cues
+houzz.com.png,FP,292,256,True,,
+crossrope.com.png,FP,186,256,False,,
+(723)www.faithful-to-nature.co.za_9b6f.jpg,FN,296,256,True,items available,items available
+(159)www.victorianplumbing.co.uk_62cc.jpg,FN,340,256,True,HURRY; CODE ENDS,HURRY; CODE ENDS
+www.1800flowers.com.png,FN,311,256,True,viewed this,viewed this
+(449)www.victorianplumbing.co.uk_7777.jpg,FN,337,256,True,HURRY; CODE ENDS,HURRY; CODE ENDS
+beemission.com.png,FN,254,256,False,ends soon; countdown,ends soon; countdown
+mirraw.com.png,FN,309,256,True,,
+droom.in.png,FN,237,256,False,people are looking,people are looking
+www.stealthangelsurvival.com.png,FN,416,256,True,HURRY; Have Taken This Offer,HURRY

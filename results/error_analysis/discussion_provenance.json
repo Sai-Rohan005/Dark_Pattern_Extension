@@ -1,0 +1,9 @@
+{
+  "script_sha256": "5dfe87af0282facb671e11dfaf7717e0fb80cdd9f5aca681bae10c7340cf7dcb",
+  "source_results_sha256": "6f005f112989852aecbac976aa4cc0a6166f6ee323b6021de6622a56ca80bad3",
+  "source_error_csv_sha256": "69730c3a945bfc1ab7b4f47d1f06908bd8b7c855567f430afccfc735fa7ce662",
+  "text_diagnostics_sha256": "ce9c4dbe376127fe018c846b89a729707b35c47a65d59911d782ce218cbb7849",
+  "false_negatives_with_all_dp_boxes_outside_crop": 4,
+  "false_negatives_with_retained_lexical_cues": 7,
+  "attention_interpretation": "Qualitative inspection; not a causal or class-specific attribution"
+}

@@ -105,6 +105,9 @@ per-seed metrics and provenance. Only completed runs receive aggregate scores.
 Never reuse the historical leaking split for claims about unseen sites/apps.
 The checked-in [CSV](results/ablation.csv) and [table](results/ablation.md) were
 produced by the configured experiment, including weak and zero-F1 results.
+The [error analysis](results/error_analysis/report.md) includes ranked screenshots,
+pattern-specific binary detection slices, modality discussion and DINOv2 encoder
+attention maps; see [reproduction instructions](docs/error_analysis.md).
 
 ## Development
 

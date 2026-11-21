@@ -1,0 +1,63 @@
+{
+  "method": "Mean-head residual attention rollout; encoder CLS token to input patches",
+  "class_specific": false,
+  "source_script_sha256": "ece586cbf7e0b6e1f6bf8d74a18f5b9800fe169e48106e2deb1d90bacb5a90e2",
+  "method_source_sha256": "2364253852bf4420195d5bc5de78383dc44a3a734680788deb44cf67f7d47e54",
+  "evaluated_dino_sha256": "530d3baffa34b24a0d609b0d02ac4cd7b30ef9f3ec16a036ca2f8023ff1f4435",
+  "results_sha256": "6f005f112989852aecbac976aa4cc0a6166f6ee323b6021de6622a56ca80bad3",
+  "error_csv_sha256": "69730c3a945bfc1ab7b4f47d1f06908bd8b7c855567f430afccfc735fa7ce662",
+  "examples": [
+    {
+      "file_name": "houzz.com.png",
+      "visualization": "assets/attention-FP-1-384.png",
+      "png_sha256": "e5bb19660e7a80251458b1c4e96cdbefa824f8a4787b4c17e793833e09419c2a",
+      "rollout_sha256": "4d2696731956f51326d6ea8314665772195386d94ddf7dc23abeee5047c582bf",
+      "cached_embedding_max_abs_difference": 1.6570091247558594e-05,
+      "layers": 12,
+      "heads": 12,
+      "patch_grid": [
+        16,
+        16
+      ]
+    },
+    {
+      "file_name": "crossrope.com.png",
+      "visualization": "assets/attention-FP-2-370.png",
+      "png_sha256": "019672504aa8b966f5081f9309c4f7876bfda3da448bc0875e73c844c822dbb8",
+      "rollout_sha256": "d4c14d469b1eced1e4e775b72688c5399e74a8e183d602efd00c9a2559959f3e",
+      "cached_embedding_max_abs_difference": 1.7642974853515625e-05,
+      "layers": 12,
+      "heads": 12,
+      "patch_grid": [
+        16,
+        16
+      ]
+    },
+    {
+      "file_name": "(723)www.faithful-to-nature.co.za_9b6f.jpg",
+      "visualization": "assets/attention-FN-1-488.png",
+      "png_sha256": "4e1867424ccf8c10aad7df163738d9b98226fd37321a0bc650e3e9b47bc2dfc8",
+      "rollout_sha256": "67e28847fcfacb6fdb405cdc35c3fa4ca8ded99d4cb1111060e2fe0157448cfb",
+      "cached_embedding_max_abs_difference": 1.7881393432617188e-05,
+      "layers": 12,
+      "heads": 12,
+      "patch_grid": [
+        16,
+        16
+      ]
+    },
+    {
+      "file_name": "(159)www.victorianplumbing.co.uk_62cc.jpg",
+      "visualization": "assets/attention-FN-2-495.png",
+      "png_sha256": "3d665bab466808ef7f844bf38f60716151250c38afc0e114c16feba40558c478",
+      "rollout_sha256": "c3bd589d7deb96f62759788d5cafcbf10e901e52e4615d1574bdb59d7c6ec887",
+      "cached_embedding_max_abs_difference": 1.9311904907226562e-05,
+      "layers": 12,
+      "heads": 12,
+      "patch_grid": [
+        16,
+        16
+      ]
+    }
+  ]
+}
